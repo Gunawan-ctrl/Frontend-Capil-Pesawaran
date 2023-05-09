@@ -22,8 +22,8 @@ export default ({
       default: null
     },
 		jumlah:{
-			type: Number,
-			default: 0
+			type: Array,
+			default: null
 		},
     color:{
 			type: Array,
@@ -37,20 +37,12 @@ export default ({
         datasets: [
           {
             backgroundColor: this.color,
-            // data: [40,40,50,60,50,6]
             data: this.jumlah
-            // data: [this.totalPenyakitA, this.totalPenyakitB, this.totalPenyakitC, this.totalPenyakitD]
           }
         ]
       },
 		}
 	},
-  created(){
-    console.log(this.jumlah)
-  },
-  method(){
-    console.log(this.jumlah)
-  }
 })
 
 </script>

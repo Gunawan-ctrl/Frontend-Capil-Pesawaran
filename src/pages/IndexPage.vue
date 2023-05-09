@@ -24,7 +24,7 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter ref='counter' :startAmount='0' :endAmount='`${penduduk}`' :duration='1' separator='.'
+                <vue3-autocounter ref='counter' :startAmount='0' :endAmount="Number(penduduk)" :duration='1' separator='.'
                   :autoinit='true' />
               </q-item-label>
               <q-item-label caption class="text-white">Total Penduduk Pesawaran</q-item-label>
@@ -41,7 +41,7 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter ref='counter' :startAmount='0' :endAmount='`${penduduk_pria}`' :duration='1'
+                <vue3-autocounter ref='counter' :startAmount='0' :endAmount="Number(penduduk_pria)" :duration='1'
                   separator='.' :autoinit='true' />
               </q-item-label>
               <q-item-label caption class="text-white">Total Penduduk Pria</q-item-label>
@@ -58,7 +58,7 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter ref='counter' :startAmount='0' :endAmount='`${penduduk_wanita}`' :duration='1'
+                <vue3-autocounter ref='counter' :startAmount='0' :endAmount="Number(penduduk_wanita)" :duration='1'
                   separator='.' :autoinit='true' />
               </q-item-label>
               <q-item-label caption class="text-white">Total Penduduk Wanita</q-item-label>
@@ -270,55 +270,6 @@
                 <q-separator />
               </q-tab-panel>
 
-              <!-- <q-tab-panel name="keluarga" class="col">
-                <div v-for="(d, i) in keluarga" :key="i">
-                  <div class="row">
-                    <q-item class="col-1">
-                      <q-item-section>
-                        <q-img src="images/icons/family.png" style="width: 30px;" />
-                      </q-item-section>
-                    </q-item>
-                    <q-item class="col">
-                      <q-item-section>
-                        <q-item-label caption>Nama Lengkap</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{ d.names }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                    <q-item class="col">
-                      <q-item-section>
-                        <q-item-label caption>NIK</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{ d.niks }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                    <q-item class="col">
-                    </q-item>
-                  </div>
-                  <div class="row">
-                    <q-item class="col-1">
-                    </q-item>
-                    <q-item class="col">
-                      <q-item-section>
-                        <q-item-label caption>Jenis Kelamin</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{ d.jenis_kelamins }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                    <q-item class="col">
-                      <q-item-section>
-                        <q-item-label caption>Tgl Lahir</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{ d.tgl_lahirs }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                    <q-item class="col">
-                      <q-item-section>
-                        <q-item-label caption>Hubungan</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{ d.hubungans }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </div>
-                  <q-separator />
-                </div>
-              </q-tab-panel> -->
-
               <q-tab-panel name="informasi" class="col">
                 <div class="row">
                   <q-item class="col">
@@ -527,12 +478,21 @@
         </q-card>
       </q-dialog>
 
-      <div class="row items-center q-col-gutter-sm q-mt-sm">
+      <div class="row items-center q-col-gutter-md q-mt-xs">
         <div class="col-md-4 col-xs-12">
           <ChartsDoughnat v-if="!loading" :label="penyakit" :jumlah="jumlah" :color="color"></ChartsDoughnat>
         </div>
+        <div class="col-md-4 col-xs-12">
+          <ChartsBantuan v-if="!loading" :label="bantuan" :jumlahBantuan="jumlahBantuan" :color="color"></ChartsBantuan>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <ChartsAkte v-if="!loading" :label="akte" :jumlahAkte="jumlahAkte" :color="color"></ChartsAkte>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <ChartsEktp v-if="!loading" :label="ktp" :jumlahKtp="jumlahKtp" :color="color"></ChartsEktp>
+        </div>
         <div class="col-md-8 col-xs-12">
-          <ChartsAkte v-if="!loading" :totalAkteYa="akteYa" :totalAkteTidak="akteTidak" :totalEktpYa="ektpYa" :totalEktpTidak="ektpTidak"></ChartsAkte>
+          <ChartsLine v-if="!loading"></ChartsLine>
         </div>
       </div>
     </div>
@@ -543,7 +503,10 @@
 import Lottie from "./../components/lottie.vue"
 import * as animationData from "./../../public/images/lottie/people.json"
 import ChartsAkte from './../components/MyCharts/ChartAkte.vue';
+import ChartsEktp from './../components/MyCharts/ChartEktp.vue';
+import ChartsBantuan from './../components/MyCharts/ChartBantuan.vue';
 import ChartsDoughnat from './../components/MyCharts/ChartdDoughnat.vue';
+import ChartsLine from './../components/MyCharts/ChartLine.vue';
 
 // import { Bar, Doughnut, Line } from 'vue-chartjs'
 import { Chart as ChartJS, PointElement, LineElement, Title, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
@@ -562,10 +525,11 @@ export default {
   components: {
     'vue3-autocounter': Vue3autocounter,
     lottie: Lottie,
-    ChartsAkte,
     ChartsDoughnat,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    // Line,
+    ChartsAkte,
+    ChartsEktp,
+    ChartsBantuan,
+    ChartsLine,
     LMap,
     LIcon,
     LTileLayer,
@@ -575,17 +539,17 @@ export default {
   data() {
     return {
       penyakit : [],
+      bantuan: [],
+      jumlahBantuan: [],
+      ktp: [],
+      jumlahKtp: [],
+      akte: [],
+      jumlahAkte: [],
       color : [],
+      colorKtp: [],
       jumlah: [],
       loading : true ,
       penduduk: 0,
-      jenisPenyakit: null,
-      penyakitA: 0,
-      penyakitB: 0,
-      penyakitC: 0,
-      penyakitD: 0,
-      akteYa: 0,
-      akteTidak: 0,
       penduduk_pria: 0,
       penduduk_wanita: 0,
       pria: pria,
@@ -641,26 +605,12 @@ export default {
       filter: '',
       rows: [],
       visibles: false,
-      dataLine: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 39, 10, 40, 39, 80, 40]
-          }
-        ]
-      },
     }
   },
-  computed(){
-  },
-  mounted() {
-    this.getCountPenduduk()
-  },
-  async created() {
-    await this.getCountAkte()
+  created() {
     this.getPenduduk()
+    this.getCountAkte()
+    this.getCountPenduduk()
   },
   methods: {
     getRandomColor() {
@@ -672,9 +622,8 @@ export default {
       return color;
 
   },
-    async getCountPenduduk() {
+    getCountPenduduk() {
       this.$axios.get('penduduk/getCountPenduduk')
-        .finally()
         .then((res) => {
           if (!this.$parseResponse(res.data)) {
             const data = res.data.data
@@ -694,9 +643,12 @@ export default {
         })
         .catch((err) => console.log(err))
     },
-    getPenduduk: async function () {
-      await this.$axios.get('/penduduk/')
-        .finally()
+    getPenduduk() {
+      this.$q.loading.show()
+      this.$axios.get('/penduduk/')
+        .finally(() => {
+          this.$q.loading.hide()
+        })
         .then((response) => {
           if (!this.$parseResponse(response.data)) {
             this.rows = response.data.data
@@ -730,90 +682,48 @@ export default {
             this.tgl_lahir_penduduk = res.data.data.TANGGAL_LAHIR
             this.hubungan_penduduk = res.data.data.HUBUNGAN_KEPALA_KELUARGA
             this.kecamatan_penduduk = res.data.data.KECAMATAN
-            // this.desa_penduduk = res.data.data.DESA
-            // this.dusun_penduduk = res.data.data.DUSUN
-            // this.rt_penduduk = res.data.data.RT
-            // this.status_pernikahan_penduduk = res.data.data.STATUS_PERNIKAHAN
-            // this.hp_penduduk = res.data.data.HP
-            // this.ektp_penduduk = res.data.data.EKTP
-            // this.akte_penduduk = res.data.data.AKTE
           }
         })
-        // this.$axios.get(`/penduduk/getAllById/${this.kk_penduduk}`)
-        //   .then((res) => {
-        //     if (res.data.status) {
-        //       console.log(res);
-        //       res.data.data.forEach((dataX) => {
-        //         dataX.names = dataX.NAMA_LENGKAP
-        //         dataX.niks = dataX.NIK
-        //         dataX.jenis_kelamins = dataX.JENIS_KELAMIN
-        //         dataX.tgl_lahirs = dataX.TANGGAL_LAHIR
-        //         dataX.hubungans = dataX.HUBUNGAN_KEPALA_KELUARGA
-        //         this.keluarga.push(dataX)
-        //       })
-        //     }
-        //   })
-      //   this.$axios.get(`/bantuan/getById/${NOMOR_KK}`)
-      //     .then((res) => {
-      //       if (res.data.status) {
-      //         this.bantuan_penduduk = res.data.data.BANTUAN
-      //       }
-      //     }),
-      //   this.$axios.get(`/penyakit/getById/${NOMOR_KK}`)
-      //     .then((res) => {
-      //       if (res.data.status) {
-      //         this.penyakit_penduduk = res.data.data.PENYAKIT
-      //       }
-      //     })
     },
     async getCountAkte () {
       await this.$axios.get(`penduduk/getCount_akteKtp/akte`)
         .then((res) => {
-          if (res.data.status) {
-            this.akteYa = res.data.data[0].count
-            this.akteTidak = res.data.data[1].count
-          }
+          res.data.data.forEach((data) => {
+            this.akte.push(data._id)
+            this.jumlahAkte.push(data.count)
+          })
         })
         .catch((err) => console.log(err))
 
       await this.$axios.get(`penduduk/getCount_akteKtp/ektp`)
         .then((res) => {
-          if (res.data.status) {
-            this.ektpYa = res.data.data[0].count
-            this.ektpTidak = res.data.data[1].count
-          }
+          res.data.data.forEach((data) => {
+            this.ktp.push(data._id)
+            this.jumlahKtp.push(data.count)
+          });
+        })
+        .catch((err) => console.log(err))
+
+      await this.$axios.get(`bantuan/getCountBantuan`)
+        .then((res) => {
+          res.data.data.forEach((data) => {
+            this.bantuan.push(data._id)
+            this.jumlahBantuan.push(data.count)
+          })
         })
         .catch((err) => console.log(err))
 
       await this.$axios.get(`penyakit/getCountPenyakit`)
         .then((res) => {
-          if (res.data.status) {
-            res.data.data.forEach((data) => {
-              this.penyakit.push(data._id)
-              this.jumlah.push(data.count)
-              this.color.push(this.getRandomColor())
-            });
-            this.loading = false
-          }
+          res.data.data.forEach((data) => {
+            this.penyakit.push(data._id)
+            this.jumlah.push(data.count)
+            this.color.push(this.getRandomColor())
+          });
+          this.loading = false
         })
         .catch((err) => console.log(err))
-
-      await this.$axios.get(`penduduk/getCountBantuan`)
-        .then((res) => {
-          console.log(res);
-          // if (res.data.status) {
-          //   res.data.data.forEach((data) => {
-          //     this.penyakit.push(data._id)
-          //     this.jumlah.push(data.count)
-          //   });
-          //   this.loading = false
-          // }
-        })
-        .catch((err) => console.log(err))
-
-      
-                }
+      },
     },
-    
 }
 </script>

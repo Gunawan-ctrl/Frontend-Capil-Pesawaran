@@ -152,7 +152,7 @@
             </q-item>
           </q-expansion-item>
 
-          <q-item
+          <!-- <q-item
             active-class="tab-active"
             class="navigation-item text-indigo-10"
             exact
@@ -198,7 +198,7 @@
             <q-item-section>
               Profile
             </q-item-section>
-          </q-item>
+          </q-item> -->
         </q-list>
       </q-card>
 

@@ -1,48 +1,31 @@
 <template>
 	<q-card>
     <q-card-section>
-      <div class="text-subtitle2 text-indigo-10">Penderita Penyakit</div>
-      <div class="text-caption text-grey">Data penderita penyakit</div>
-      <Doughnut :data="dataDoughnat" />
+      <div class="text-subtitle2 text-indigo-10">Chart Data Line</div>
+      <div class="text-caption text-grey">Data Line Teraktreditasi</div>
+      <Line :data="chartLine" :height="138" />
     </q-card-section>
   </q-card>
 
 </template>
 
 <script>
-import { Doughnut } from 'vue-chartjs'
+import { Line } from 'vue-chartjs'
 
 export default ({
 	components: {
-		Doughnut,
-	},
-	props: {
-		totalPenyakitA:{
-			type: Number,
-			default: 0
-		},
-		totalPenyakitB: {
-			type: Number,
-			default: 0
-		},
-		totalPenyakitC:{
-			type: Number,
-			default: 0
-		},
-		totalPenyakitD: {
-			type: Number,
-			default: 0
-		},
+		// eslint-disable-next-line vue/no-reserved-component-names
+		Line,
 	},
 	data() {
 		return {
-			dataDoughnat: {
-        labels: ['Penyakit A', 'Penyakit B', 'Penyakit C', 'Penyakit D'],
+			chartLine: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
-            backgroundColor: ['#3A1078', '#4E31AA', '#2F58CD', '#3795BD'],
-            data: [40, 20, 80, 10]
-            // data: [this.totalPenyakitA, this.totalPenyakitB, this.totalPenyakitC, this.totalPenyakitD]
+            label: ['Data One'],
+            backgroundColor: '#0003C2',
+            data: [40, 39, 10, 40, 39, 80, 40],
           }
         ]
       },

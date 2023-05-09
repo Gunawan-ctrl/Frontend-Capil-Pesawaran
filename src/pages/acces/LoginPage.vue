@@ -2,7 +2,7 @@
   <q-layout>
     <q-page-container>
       <q-page class="row items-center justify-center">
-        <q-card
+        <q-card flat
           v-bind:style="$q.screen.lt.sm ? { width: '100%' } : { width: '75%' }"
         >
           <div class="row q-col-gutter-md items-center">

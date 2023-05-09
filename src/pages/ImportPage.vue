@@ -83,7 +83,10 @@ export default {
       const formData = new FormData()
       formData.append('file', this.file)
       this.$axios.post("penduduk/importCsv", formData).then((res) => {
-        console.log(res);
+        if (res.data.status) {
+          this.$successNotif(res.data.message, "positive");
+          this.$router.push({ name: "dashboard" })
+        }
       })
     }
   },

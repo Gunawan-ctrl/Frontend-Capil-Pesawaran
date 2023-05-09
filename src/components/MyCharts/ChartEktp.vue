@@ -1,9 +1,9 @@
 <template>
 	<q-card :bordered="false" class="dashboard-bar-chart">
 		<q-card-section>
-			<div class="text-subtitle2 text-indigo-10">Data AKTE</div>
-			<div class="text-caption text-grey">Informasi data yang mempunyai akte kelahiran</div>
-			<Bar :data="chartAkte" :height="300" />
+			<div class="text-subtitle2 text-indigo-10">Data EKTP</div>
+			<div class="text-caption text-grey">Informasi data yang mempunyai ektp</div>
+			<Bar :data="chartEktp" :height="300" />
 		</q-card-section>
 	</q-card>
 
@@ -21,7 +21,7 @@ export default ({
       type: Array,
       default: null
     },
-		jumlahAkte:{
+		jumlahKtp:{
 			type: Array,
 			default: null
 		},
@@ -32,14 +32,14 @@ export default ({
 	},
 	data() {
 		return {
-			chartAkte: {
+			chartEktp: {
         labels: this.label,
         datasets: [
           {
-            label: 'Data Akte',
+            label: 'Data Ektp',
             backgroundColor: this.color,
 						borderRadius: 6,
-            data: this.jumlahAkte,
+            data: this.jumlahKtp,
 						maxBarThickness: 30,
           }
         ]

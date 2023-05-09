@@ -169,7 +169,9 @@ createQuasarApp(createApp, quasarUserOptions)
       
       import(/* webpackMode: "eager" */ 'boot/utils'),
       
-      import(/* webpackMode: "eager" */ 'boot/createToken')
+      import(/* webpackMode: "eager" */ 'boot/createToken'),
+      
+      import(/* webpackMode: "eager" */ 'boot/Notify')
       
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')

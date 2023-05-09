@@ -8,8 +8,8 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 
-// const baseURL = 'http://localhost:5050/'
-const baseURL = 'http://192.168.4.71:5050/'
+const baseURL = 'http://localhost:5050/'
+// const baseURL = 'http://192.168.4.71:5050/'
 
 const api = axios.create({ baseURL: baseURL })
 

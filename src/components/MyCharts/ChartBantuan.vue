@@ -1,27 +1,27 @@
 <template>
 	<q-card :bordered="false" class="dashboard-bar-chart">
 		<q-card-section>
-			<div class="text-subtitle2 text-indigo-10">Data AKTE</div>
-			<div class="text-caption text-grey">Informasi data yang mempunyai akte kelahiran</div>
-			<Bar :data="chartAkte" :height="300" />
+			<div class="text-subtitle2 text-indigo-10">Data Bantuan</div>
+			<div class="text-caption text-grey">Informasi data Bantuan</div>
+			<Doughnut :data="chartBantuan" :height="300" />
 		</q-card-section>
 	</q-card>
 
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs'
 
 export default ({
 	components: {
-		Bar,
+		Doughnut
 	},
 	props: {
 		label : {
       type: Array,
       default: null
     },
-		jumlahAkte:{
+		jumlahBantuan:{
 			type: Array,
 			default: null
 		},
@@ -32,14 +32,14 @@ export default ({
 	},
 	data() {
 		return {
-			chartAkte: {
+			chartBantuan: {
         labels: this.label,
         datasets: [
           {
-            label: 'Data Akte',
+            label: 'Data Bantuan',
             backgroundColor: this.color,
 						borderRadius: 6,
-            data: this.jumlahAkte,
+            data: this.jumlahBantuan,
 						maxBarThickness: 30,
           }
         ]

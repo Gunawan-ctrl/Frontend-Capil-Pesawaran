@@ -106,9 +106,7 @@ export default {
       }).then(async(res) => {
         if (res.data.status) {
           this.data = res.data.data
-          // console.log(this.data)
           this.exportToCSV(this.data)
-          // console.log(this.data);/
         }
       })
     },
