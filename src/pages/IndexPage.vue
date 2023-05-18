@@ -148,8 +148,8 @@
             <q-separator />
 
             <q-tab-panels v-model="tab" animated>
-              <q-tab-panel name="penduduk" class="col">
-                <div class="row">
+              <q-tab-panel name="penduduk" class="col" >
+                <div class="row"  >
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Nama Lengkap</q-item-label>
@@ -159,7 +159,7 @@
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>NIK</q-item-label>
-                      <q-item-label class="text-weight-bold">{{ this.NIK_penduduk }}</q-item-label>
+                      <q-item-label class="text-weight-bold">{{this.NIK_penduduk }}</q-item-label>
                     </q-item-section>
                   </q-item>
                 </div>
@@ -220,54 +220,56 @@
               </q-tab-panel>
 
               <q-tab-panel name="keluarga" class="col">
-                <div class="row">
-                  <q-item class="col-1">
-                    <q-item-section>
-                      <q-img src="images/icons/family.png" style="width: 30px;" />
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>Nama Lengkap</q-item-label>
-                      <q-item-label class="text-weight-bold">{{ namaLengkap_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>NIK</q-item-label>
-                      <q-item-label class="text-weight-bold">{{ this.NIK_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                </div>
-                <q-separator />
-                <div class="row">
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>Jenis Kelamin</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{ this.jenis_kelamin_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>Tgl Lahir</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{ this.tgl_lahir_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>Hubungan</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{ this.hubungan_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
+                <div v-for="(d, i) in dataKeluarga" :key="i">
+                  <div class="row" >
+                    <q-item class="col-1">
+                      <q-item-section>
+                        <q-img src="images/icons/family.png" style="width: 30px;" />
+                      </q-item-section>
+                    </q-item>
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>Nama Lengkap</q-item-label>
+                        <q-item-label class="text-weight-bold">{{ d.NAMA_LENGKAP }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>NIK</q-item-label>
+                        <q-item-label class="text-weight-bold">{{ d.NIK }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </div>
                   <q-separator />
-                  <q-item class="col">
-                    <q-item-section>
-                      <q-item-label caption>Kecamatan</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{ this.kecamatan_penduduk }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
+                  <div class="row">
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>Jenis Kelamin</q-item-label>
+                        <q-item-label caption class="text-weight-bold">{{ d.JENIS_KELAMIN }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>Tgl Lahir</q-item-label>
+                        <q-item-label caption class="text-weight-bold">{{ d.TANGGAL_LAHIR }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>Hubungan</q-item-label>
+                        <q-item-label caption class="text-weight-bold">{{ d.HUBUNGAN_KEPALA_KELUARGA }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-separator />
+                    <q-item class="col">
+                      <q-item-section>
+                        <q-item-label caption>Kecamatan</q-item-label>
+                        <q-item-label caption class="text-weight-bold">{{ d.KECAMATAN }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </div>
+                  <q-separator />
                 </div>
-                <q-separator />
               </q-tab-panel>
 
               <q-tab-panel name="informasi" class="col">
@@ -508,13 +510,12 @@ import ChartsBantuan from './../components/MyCharts/ChartBantuan.vue';
 import ChartsDoughnat from './../components/MyCharts/ChartdDoughnat.vue';
 import ChartsLine from './../components/MyCharts/ChartLine.vue';
 
-// import { Bar, Doughnut, Line } from 'vue-chartjs'
 import { Chart as ChartJS, PointElement, LineElement, Title, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 ChartJS.register(ArcElement, PointElement, LineElement, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 import { LMap, LIcon, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet'
-import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 
 import Vue3autocounter from 'vue3-autocounter'
 
@@ -545,6 +546,7 @@ export default {
       jumlahKtp: [],
       akte: [],
       jumlahAkte: [],
+      dataKeluarga: [],
       color : [],
       colorKtp: [],
       jumlah: [],
@@ -674,15 +676,7 @@ export default {
       this.akte_penduduk = data.AKTE
       this.$axios.get(`penduduk/getById/${this.kk_penduduk}`)
         .then((res) => {
-          if (res.data.status) {
-            this.kk_penduduk = res.data.data.NOMOR_KK
-            this.namaLengkap_penduduk = res.data.data.NAMA_LENGKAP
-            this.NIK_penduduk = res.data.data.NIK
-            this.jenis_kelamin_penduduk = res.data.data.JENIS_KELAMIN
-            this.tgl_lahir_penduduk = res.data.data.TANGGAL_LAHIR
-            this.hubungan_penduduk = res.data.data.HUBUNGAN_KEPALA_KELUARGA
-            this.kecamatan_penduduk = res.data.data.KECAMATAN
-          }
+          this.dataKeluarga = res.data.data
         })
     },
     async getCountAkte () {

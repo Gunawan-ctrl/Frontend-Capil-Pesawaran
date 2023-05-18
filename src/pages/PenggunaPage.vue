@@ -38,8 +38,8 @@
             </q-item>
             <q-separator />
             <q-form @submit="inputPengguna()">
-              <q-card-section vertical>
-                <q-card-section class="q-gutter-xs fit">
+              <q-card-section horizontal>
+                <q-card-section class="q-gutter-md fit">
                   <q-input
                     outlined
                     dense
@@ -47,8 +47,6 @@
                     v-model="nama_instansi"
                     label="Instansi"
                   />
-                </q-card-section>
-                <q-card-section>
                   <q-input
                     outlined
                     dense
@@ -56,8 +54,6 @@
                     v-model="logo_instansi"
                     label="Logo Instansi"
                   />
-                </q-card-section>
-                <q-card-section>
                   <q-input
                     outlined
                     dense
@@ -66,32 +62,30 @@
                     label="Email"
                   />
                 </q-card-section>
-    
+
                 <q-separator vertical />
-    
-                <q-card-section class="q-gutter-xs fit">
-                  <q-select
+
+                <q-card-section class="q-gutter-md fit">
+                  <q-input
+                    type="number"
+                    dense outlined
+                    v-model="noTelpon"
+                    label="No Telepon"
+                  />
+                  <q-input
+                    class="text-capitalize"
+                    dense outlined
+                    v-model="alamat"
+                    label="Alamat"
+                  />
+                  <q-input
+                    type="number"
+                    class="text-capitalize"
                     dense
-                    width="fit-content"
                     outlined
-                    key="plat_id"
-                    v-model="no_plat"
-                    option-label="plat_id"
-                    :options="listPlat"
-                    label="No Plat"
-                    :rules="[ val => val !== null || 'No plat tidak boleh kosong']"
-                  >
-                    <template v-slot:option="scope">
-                      <q-item v-bind="scope.itemProps">
-                        <q-item-section>
-                          <q-item-label caption>{{ scope.opt.plat_id }}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                    </template>
-                  </q-select>
-                  <q-input type="mail" dense outlined v-model="email" label="Email" :rules="[ val => val && val.length > 0 || 'Email tidak boleh kosong']"/>
-                  <q-input class="text-capitalize" dense outlined v-model="alamat" label="Alamat" :rules="[ val => val && val.length > 0 || 'Alamat tidak boleh kosong']"/>
-                  <q-input type="number" class="text-capitalize" dense outlined v-model="app_code" label="App Code" :rules="[ val => val && val.length > 0 || 'App code tidak boleh kosong']"/>
+                    v-model="app_code"
+                    label="App Code"
+                  />
                 </q-card-section>
               </q-card-section>
 
