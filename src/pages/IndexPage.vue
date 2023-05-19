@@ -481,16 +481,16 @@
       </q-dialog>
 
       <div class="row items-center q-col-gutter-md q-mt-xs">
-        <div class="col-md-4 col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-4">
           <ChartsDoughnat v-if="!loading" :label="penyakit" :jumlah="jumlah" :color="color"></ChartsDoughnat>
         </div>
-        <div class="col-md-4 col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-4">
           <ChartsBantuan v-if="!loading" :label="bantuan" :jumlahBantuan="jumlahBantuan" :color="color"></ChartsBantuan>
         </div>
-        <div class="col-md-4 col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-4">
           <ChartsAkte v-if="!loading" :label="akte" :jumlahAkte="jumlahAkte" :color="color"></ChartsAkte>
         </div>
-        <div class="col-md-4 col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-4">
           <ChartsEktp v-if="!loading" :label="ktp" :jumlahKtp="jumlahKtp" :color="color"></ChartsEktp>
         </div>
         <div class="col-md-8 col-xs-12">
