@@ -255,25 +255,25 @@
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Desa</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{
-                        this.desa_penduduk
-                      }}</q-item-label>
+                      <q-item-label caption class="text-weight-bold">
+                        {{ this.desa_penduduk }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Dusun</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{
-                        this.dusun_penduduk
-                      }}</q-item-label>
+                      <q-item-label caption class="text-weight-bold">
+                        {{ this.dusun_penduduk }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>RT</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{
-                        this.rt_penduduk
-                      }}</q-item-label>
+                      <q-item-label caption class="text-weight-bold">
+                        {{ this.rt_penduduk }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                 </div>
@@ -290,9 +290,9 @@
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Tgl Lahir</q-item-label>
-                      <q-item-label caption class="text-weight-bold">{{
-                        this.tgl_lahir_penduduk
-                      }}</q-item-label>
+                      <q-item-label caption class="text-weight-bold">
+                        {{ $parseDate(this.tgl_lahir_penduduk).fullDate }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="col">
@@ -355,9 +355,9 @@
                     <q-item class="col">
                       <q-item-section>
                         <q-item-label caption>Tgl Lahir</q-item-label>
-                        <q-item-label caption class="text-weight-bold">{{
-                          d.TANGGAL_LAHIR
-                        }}</q-item-label>
+                        <q-item-label caption class="text-weight-bold">
+                          {{ $parseDate(d.TANGGAL_LAHIR).fullDate }}
+                        </q-item-label>
                       </q-item-section>
                     </q-item>
                     <q-item class="col">
@@ -482,16 +482,16 @@
                     <q-item-section>
                       <q-item-label caption>Penghasilan</q-item-label>
                       <q-item-label caption class="text-weight-bold"
-                        >Rp. 420.000 s.d s/d Rp. 1.000.000</q-item-label
-                      >
+                        >{{ this.penghasilan }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Sumber Penerangan</q-item-label>
-                      <q-item-label caption class="text-weight-bold"
-                        >Listrik PLN dengan Meteran</q-item-label
-                      >
+                      <q-item-label caption class="text-weight-bold">
+                        {{ this.sumber_penerangan }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                 </div>
@@ -500,17 +500,17 @@
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Sumber Air Minum</q-item-label>
-                      <q-item-label caption class="text-weight-bold"
-                        >Sumur Terlindung</q-item-label
-                      >
+                      <q-item-label caption class="text-weight-bold">{{
+                        this.sumber_air_minum
+                      }}</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Bahan Bakar Masak</q-item-label>
-                      <q-item-label caption class="text-weight-bold"
-                        >Gas Elpiji 3 Kg</q-item-label
-                      >
+                      <q-item-label caption class="text-weight-bold">{{
+                        this.bahan_bakar_masak
+                      }}</q-item-label>
                     </q-item-section>
                   </q-item>
                 </div>
@@ -519,8 +519,8 @@
                   <q-item class="col">
                     <q-item-section>
                       <q-item-label caption>Fasilitas BAB</q-item-label>
-                      <q-item-label caption class="text-weight-bold"
-                        >Leher Angsa</q-item-label
+                      <q-item-label caption class="text-weight-bold">
+                        {{ this.fasilitas_bab }}</q-item-label
                       >
                     </q-item-section>
                   </q-item>
@@ -790,6 +790,11 @@ export default {
       this.hp_penduduk = data.HP;
       this.ektp_penduduk = data.EKTP;
       this.akte_penduduk = data.AKTE;
+      this.penghasilan = data.PENGHASILAN;
+      this.sumber_penerangan = data.SUMBER_PENERANGAN;
+      this.sumber_air_minum = data.SUMBER_AIR_MINUM;
+      this.bahan_bakar_masak = data.BAHAN_BAKAR_MASAK;
+      this.fasilitas_bab = data.FASILITAS_BAB;
       this.$axios.get(`penduduk/getById/${this.kk_penduduk}`).then((res) => {
         this.dataKeluarga = res.data.data;
       });
