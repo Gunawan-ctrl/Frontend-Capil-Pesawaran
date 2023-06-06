@@ -12,6 +12,8 @@
 
 
 
+
+
 import { Quasar } from 'quasar'
 import { markRaw } from 'vue'
 import RootComponent from 'app/src/App.vue'
@@ -23,15 +25,11 @@ import createRouter from 'app/src/router/index'
 
 
 
-
-
 export default async function (createAppFn, quasarUserOptions) {
   // Create the app instance.
   // Here we inject into it the Quasar UI, the router & possibly the store.
   const app = createAppFn(RootComponent)
 
-  
-  app.config.performance = true
   
 
   app.use(Quasar, quasarUserOptions)
