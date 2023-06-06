@@ -767,7 +767,6 @@ export default {
           this.$q.loading.hide();
         })
         .then((response) => {
-          console.log(response);
           if (!this.$parseResponse(response.data)) {
             this.rows = response.data.data;
           }

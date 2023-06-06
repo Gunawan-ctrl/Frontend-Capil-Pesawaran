@@ -99,7 +99,6 @@ export default {
       formData.append("file", this.file);
       this.$axios.post("penduduk/importCsv", formData).then((res) => {
         if (res.data.status) {
-          console.log(res);
           this.$successNotif(res.data.message, "positive");
           this.$router.push({ name: "dashboard" });
         } else {
