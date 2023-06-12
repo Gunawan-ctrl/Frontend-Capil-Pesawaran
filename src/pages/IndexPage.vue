@@ -26,14 +26,15 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter
+                {{ penduduk }}
+                <!-- <vue3-autocounter
                   ref="counter"
                   :startAmount="0"
                   :endAmount="Number(penduduk)"
                   :duration="1"
                   separator="."
                   :autoinit="true"
-                />
+                /> -->
               </q-item-label>
               <q-item-label caption class="text-white"
                 >Total Penduduk Pesawaran</q-item-label
@@ -51,14 +52,15 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter
+                {{ penduduk_pria }}
+                <!-- <vue3-autocounter
                   ref="counter"
                   :startAmount="0"
                   :endAmount="Number(penduduk_pria)"
                   :duration="1"
                   separator="."
                   :autoinit="true"
-                />
+                /> -->
               </q-item-label>
               <q-item-label caption class="text-white"
                 >Total Penduduk Pria</q-item-label
@@ -76,14 +78,15 @@
             </q-card-section>
             <q-card-section>
               <q-item-label class="text-white text-weight-bold">
-                <vue3-autocounter
+                {{ penduduk_wanita }}
+                <!-- <vue3-autocounter
                   ref="counter"
                   :startAmount="0"
                   :endAmount="Number(penduduk_wanita)"
                   :duration="1"
                   separator="."
                   :autoinit="true"
-                />
+                /> -->
               </q-item-label>
               <q-item-label caption class="text-white"
                 >Total Penduduk Wanita</q-item-label
@@ -596,7 +599,7 @@
 </template>
 
 <script>
-import Vue3autocounter from "vue3-autocounter";
+// import Vue3autocounter from "vue3-autocounter";
 import Lottie from "./../components/lottie.vue";
 import * as animationData from "./../../public/images/lottie/people.json";
 import MyMap from "./../components/MyMaps.vue";
@@ -634,7 +637,7 @@ ChartJS.register(
 export default {
   name: "IndexPage",
   components: {
-    "vue3-autocounter": Vue3autocounter,
+    // "vue3-autocounter": Vue3autocounter,
     Lottie,
     MyMap,
     ChartsDoughnat,
@@ -746,7 +749,7 @@ export default {
             var pria = 0;
             var wanita = 0;
             data.map(function (datas) {
-              if (datas._id === "Laki-Laki") {
+              if (datas._id.toLowerCase() === "laki-laki") {
                 pria = datas.myCount;
               } else {
                 wanita = datas.myCount;
@@ -797,6 +800,14 @@ export default {
       this.$axios.get(`penduduk/getById/${this.kk_penduduk}`).then((res) => {
         this.dataKeluarga = res.data.data;
       });
+      this.$axios.get(`penyakit/getById/${this.NIK_penduduk}`).then((res) => {
+        this.dataPenyakit = res.data.data;
+        this.penyakit_penduduk = this.dataPenyakit.PENYAKIT;
+      });
+      this.$axios.get(`bantuan/getById/${this.NIK_penduduk}`).then((res) => {
+        this.dataBantuan = res.data.data;
+        this.bantuan_penduduk = this.dataBantuan.BANTUAN;
+      });
     },
     async getCountAkte() {
       await this.$axios
@@ -840,6 +851,14 @@ export default {
           this.loading = false;
         })
         .catch((err) => console.log(err));
+
+      // await this.$axios
+      //   .get(`penduduk/getById/${this.NIK_penduduk}`)
+      //   .then((res) => {
+      //     console.log(res);
+      //     this.penyakit = res.data.data;
+      //   })
+      //   .catch((err) => console.log(err));
     },
   },
 };
